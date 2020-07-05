@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Airport_IS.Models.Entities.Departure>
+    <h1>Departure list formation</h1>
+@using (Html.BeginForm("Schedule", "List", FormMethod.Get))
+{
+
+    <fieldset class="form-inline">
+        <p>
+            <label>Flight</label>
+            @Html.DropDownList("FlightName", ViewBag.Flights as SelectList, "Please select", new { @class = "form-control" })
+            <label>Date</label>
+            @Html.DropDownList("date", ViewBag.Dates as SelectList, "Please select", new { @class = "form-control" })
+            <input type="submit" value="Execute" class="btn btn-success" />
+        </p>
+
+    </fieldset>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Flight name")
+            </th>
+            <th>
+                @Html.DisplayName("Departure date")
+            </th>
+            <th>
+                @Html.DisplayName("Departure time")
+            </th>
+            <th>
+                @Html.DisplayName("Arrival time")
+            </th>
+            <th>
+                @Html.DisplayName("Flight time")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Flight.FlightName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Flight.DepartureTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Flight.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Flight.FlightTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Passenger list", "PassengerList", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Baggage list", "BaggageList", new { id = item.Id }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

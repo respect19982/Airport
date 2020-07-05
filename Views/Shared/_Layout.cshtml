@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Airport</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Purchase", "Purchase", "Tickets")</li>
+                    <li></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Schedule
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Departure schedule", "Schedule", "Departure")</a></li>
+                            <li><a href="#">@Html.ActionLink("Departure schedule for dispatchers", "ScheduleForDispatchers", "Departure")</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Administration
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Pilot administration", "Purchase", "Tickets")</a></li>
+                            <li><a href="#">@Html.ActionLink("Crew administration", "Purchase", "Tickets")</a></li>
+                            <li><a href="#">@Html.ActionLink("Flight administration", "Purchase", "Tickets")</a></li>
+                            <li><a href="#">@Html.ActionLink("Departure administration", "Purchase", "Tickets")</a></li>
+                            <li><a href="#">@Html.ActionLink("Aircraft administration", "AircraftList", "Aircraft")</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Registration
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Baggage Check-In", "BaggageCheckIn", "Registration")</a></li>
+                            <li><a href="#">@Html.ActionLink("Passenger Сheck-In", "PassengerCheckIn", "Registration")</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Price formation", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Departure list formation", "Schedule", "List")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

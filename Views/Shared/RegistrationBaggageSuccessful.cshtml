@@ -1,0 +1,36 @@
+﻿@model Airport_IS.Models.Entities.Baggage
+
+@{
+    ViewBag.Title = "RegistrationBaggageSuccessful";
+}
+
+    <h2>Registration baggage successful</h2>
+
+<div>
+    <h4>Baggage information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Baggage number:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Baggage weight:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <h3>
+        @Html.ActionLink("Back to home", "Index", "Home")
+    </h3>
+
+</div>

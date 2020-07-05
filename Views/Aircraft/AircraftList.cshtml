@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Airport_IS.Models.Entities.Aircraft>
+
+@{
+    ViewBag.Title = "AircraftList";
+}
+
+<h2>Aircraft list</h2>
+
+
+@using (Html.BeginForm("Create", "Aircraft", FormMethod.Get))
+{
+<fieldset class="form-inline">
+    <p>
+        <input type="submit" value="Create new" class="btn btn-success" />
+    </p>
+
+</fieldset>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AirCraftBrend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Speed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfSeats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fuel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TailNum)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirCraftBrend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fuel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TailNum)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-success" })
+            </td>
+        </tr>
+    }
+
+</table>

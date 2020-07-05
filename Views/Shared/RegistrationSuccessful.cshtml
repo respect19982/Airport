@@ -1,0 +1,118 @@
+﻿@model Airport_IS.Models.Entities.TicketSale
+
+@{
+    ViewBag.Title = "RegistrationSuccessful";
+}
+
+<h2>Registration successful</h2>
+
+<div>
+    <h4>Ticket information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("First name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Last name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Passport series")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassportSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Pssport number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassportNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Place number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Class)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Class)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Flight:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.FlightName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Departure date:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Departure time:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Arrival time:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.ArrivalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Flight time:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.FlightTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Aircraft information:")
+        </dt>
+
+        <dd>
+            Aircraft brand:
+            @Html.DisplayFor(model => model.Departure.Aircraft.AirCraftBrend);
+            Tail number:
+            @Html.DisplayFor(model => model.Departure.Aircraft.TailNum);
+        </dd>
+    </dl>
+</div>
+<div>
+    <h3>
+        @Html.ActionLink("Back to home", "Index", "Home")
+    </h3>
+
+</div>

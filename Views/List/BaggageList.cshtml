@@ -1,0 +1,15 @@
+﻿<h1>Creating a list of baggages</h1>
+@using (Html.BeginForm("PassengerList", "List", FormMethod.Post))
+{
+    <fieldset class="form-inline">
+        <p>
+            <label>Flight</label>
+            @Html.DropDownList("FlightName", ViewBag.Flights as SelectList, "Please select", new { @class = "form-control" })
+            <label>Date</label>
+            @Html.DropDownList("date", ViewBag.Dates as SelectList, "Please select", new { @class = "form-control" })
+            <label>Type</label>
+            <input type="submit" value="Build" class="btn btn-success" />
+        </p>
+
+    </fieldset>
+}

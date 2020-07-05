@@ -1,0 +1,137 @@
+﻿@model Airport_IS.Models.Entities.Departure
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>All information about departure</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("ID:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayName("Flight:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.FlightName);
+            Flight type:
+            @Html.DisplayFor(model => model.Flight.FlightType)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Airline:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.Airline.AirlineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Source airport:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.SourceAirport.AirportName);
+            @Html.DisplayFor(model => model.Flight.SourceAirport.City.NameCity);
+            @Html.DisplayFor(model => model.Flight.SourceAirport.City.Country.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Destination airport:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.DestinationAirport.AirportName);
+            @Html.DisplayFor(model => model.Flight.DestinationAirport.City.NameCity);
+            @Html.DisplayFor(model => model.Flight.DestinationAirport.City.Country.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Aircraft information:")
+        </dt>
+        <dd>
+            Aircraft brand:
+            @Html.DisplayFor(model => model.Aircraft.AirCraftBrend);
+            Tail number:
+            @Html.DisplayFor(model => model.Aircraft.TailNum);
+            Num of seats:
+            @Html.DisplayFor(model => model.Aircraft.NumberOfSeats);
+            Fuel:
+            @Html.DisplayFor(model => model.Aircraft.Fuel);
+            Speed:
+            @Html.DisplayFor(model => model.Aircraft.Speed)
+        </dd>
+        <dt>
+            @Html.DisplayName("Crew name:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Crew.CrewName)
+        </dd>
+        @foreach (var item in Model.Crew.Pilots)
+        {
+            <dt>
+                @Html.DisplayName("Pilot:")
+            </dt>
+            <dd>
+                First name:
+                @Html.DisplayFor(modelItem => item.FirstName);
+                Last name:
+                @Html.DisplayFor(modelItem => item.LastName);
+                Phone number:
+                @Html.DisplayFor(modelItem => item.PhoneNum);
+                Position:
+                @Html.DisplayFor(modelItem => item.Position.PositionName);
+                Date of birth:
+                @Html.DisplayFor(modelItem => item.DateofBirth)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayName("Departure time:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Arrival time:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.ArrivalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Flight time:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Flight.FlightTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Purchased tickets:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumOfPurchasedTickets)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Registered passengers:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumOfRegisteredPass)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Checked baggage:")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumOfCheckedBaggage)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "ScheduleForDispatchers")
+</p>

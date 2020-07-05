@@ -1,0 +1,138 @@
+﻿@model Airport_IS.Models.Entities.TicketSale
+
+@{
+    ViewBag.Title = "Res";
+}
+
+<div>
+    <h3>Successfully. Ticket purchased.</h3>
+    <h4>Ticket Information:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Ticket number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Flight")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.FlightName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Date")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Departure time")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Arrival time")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.ArrivalTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Flight time")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure.Flight.FlightTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Passport series")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassportSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Passport number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassportNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Phone")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ticket price")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Class)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Class)
+        </dd>
+
+    </dl>
+</div>
+<h3>
+    @Html.ActionLink("Back to home", "Index", "Home")
+</h3>
+
+

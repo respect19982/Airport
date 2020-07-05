@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Airport_IS.Models.Entities.Departure>
+
+
+<h1>Schedule</h1>
+@using (Html.BeginForm("Schedule", "Departure", FormMethod.Get))
+{
+    <fieldset class="form-inline">
+        <p>
+            <label>Flight</label>
+            @Html.DropDownList("FlightName", ViewBag.Flights as SelectList, "Please select", new { @class = "form-control" })
+            <label>Date</label>
+            @Html.DropDownList("date", ViewBag.Dates as SelectList, "Please select", new { @class = "form-control" })
+            <label>Type</label>
+            @Html.DropDownList("type", ViewBag.Types as SelectList, "Please select", new { @class = "form-control" })
+            <input type="submit" value="Schedule" class="btn btn-success" />
+        </p>
+
+    </fieldset>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Flight")
+            </th>
+            <th>
+                @Html.DisplayName("Aicraft")
+            </th>
+            <th>
+                @Html.DisplayName("Airline")
+            </th>
+            <th>
+                @Html.DisplayName("Crew")
+            </th>
+            <th>
+                @Html.DisplayName("Departure date")
+            </th>
+            <th>
+                @Html.DisplayName("Departure time")
+            </th>
+            <th>
+                @Html.DisplayName("Arrival time")
+            </th>
+            <th>
+                @Html.DisplayName("Flight time")
+            </th>
+            <th>
+                @Html.DisplayName("Flight type")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.FlightName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aircraft.AirCraftBrend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.Airline.AirlineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Crew.CrewName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.FlightTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.FlightType)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Airport_IS.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aircraft" customannotation:ClrType="Airport_IS.Models.Entities.Aircraft, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirCraftBrend" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Speed" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfSeats" Type="Int32" Nullable="false" />
+    <Property Name="Fuel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TailNum" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departures" Relationship="Self.Departure_Aircraft" FromRole="Departure_Aircraft_Target" ToRole="Departure_Aircraft_Source" />
+  </EntityType>
+  <EntityType Name="Departure" customannotation:ClrType="Airport_IS.Models.Entities.Departure, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewId" Type="Int32" Nullable="false" />
+    <Property Name="FlightId" Type="Int32" Nullable="false" />
+    <Property Name="AircraftId" Type="Int32" Nullable="false" />
+    <Property Name="RateId" Type="Int32" Nullable="false" />
+    <Property Name="AirportTaxId" Type="Int32" Nullable="false" />
+    <Property Name="DepartureDate" Type="DateTime" Nullable="false" />
+    <Property Name="NumOfPurchasedTickets" Type="Int32" Nullable="false" />
+    <Property Name="NumOfRegisteredPass" Type="Int32" Nullable="false" />
+    <Property Name="NumOfCheckedBaggage" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Aircraft" Relationship="Self.Departure_Aircraft" FromRole="Departure_Aircraft_Source" ToRole="Departure_Aircraft_Target" />
+    <NavigationProperty Name="AirportTax" Relationship="Self.AirportTax_Departures" FromRole="AirportTax_Departures_Target" ToRole="AirportTax_Departures_Source" />
+    <NavigationProperty Name="Crew" Relationship="Self.Crew_Departures" FromRole="Crew_Departures_Target" ToRole="Crew_Departures_Source" />
+    <NavigationProperty Name="Flight" Relationship="Self.Flight_Departures" FromRole="Flight_Departures_Target" ToRole="Flight_Departures_Source" />
+    <NavigationProperty Name="Rate" Relationship="Self.Rate_Departures" FromRole="Rate_Departures_Target" ToRole="Rate_Departures_Source" />
+    <NavigationProperty Name="TicketSales" Relationship="Self.TicketSale_Departure" FromRole="TicketSale_Departure_Target" ToRole="TicketSale_Departure_Source" />
+  </EntityType>
+  <EntityType Name="AirportTax" customannotation:ClrType="Airport_IS.Models.Entities.AirportTax, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirportTaxName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="amountOfMoney" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departures" Relationship="Self.AirportTax_Departures" FromRole="AirportTax_Departures_Source" ToRole="AirportTax_Departures_Target" />
+  </EntityType>
+  <EntityType Name="Crew" customannotation:ClrType="Airport_IS.Models.Entities.Crew, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberPilotsInCrew" Type="Int32" Nullable="false" />
+    <Property Name="CrewExperience" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departures" Relationship="Self.Crew_Departures" FromRole="Crew_Departures_Source" ToRole="Crew_Departures_Target" />
+    <NavigationProperty Name="Pilots" Relationship="Self.Pilot_Crew" FromRole="Pilot_Crew_Target" ToRole="Pilot_Crew_Source" />
+  </EntityType>
+  <EntityType Name="Pilot" customannotation:ClrType="Airport_IS.Models.Entities.Pilot, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PositionId" Type="Int32" />
+    <Property Name="CrewId" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateofBirth" Type="DateTime" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Crew" Relationship="Self.Pilot_Crew" FromRole="Pilot_Crew_Source" ToRole="Pilot_Crew_Target" />
+    <NavigationProperty Name="Position" Relationship="Self.Position_Pilots" FromRole="Position_Pilots_Target" ToRole="Position_Pilots_Source" />
+  </EntityType>
+  <EntityType Name="Position" customannotation:ClrType="Airport_IS.Models.Entities.Position, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PositionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <Property Name="Prize" Type="Double" Nullable="false" />
+    <Property Name="Property" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pilots" Relationship="Self.Position_Pilots" FromRole="Position_Pilots_Source" ToRole="Position_Pilots_Target" />
+  </EntityType>
+  <EntityType Name="Flight" customannotation:ClrType="Airport_IS.Models.Entities.Flight, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirlineId" Type="Int32" Nullable="false" />
+    <Property Name="SourceAirportId" Type="Int32" Nullable="false" />
+    <Property Name="DestinationAirportId" Type="Int32" Nullable="false" />
+    <Property Name="FlightName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepartureTime" Type="Time" Nullable="false" />
+    <Property Name="ArrivalTime" Type="Time" Nullable="false" />
+    <Property Name="FlightTime" Type="Time" Nullable="false" />
+    <NavigationProperty Name="Airline" Relationship="Self.Airline_Flights" FromRole="Airline_Flights_Target" ToRole="Airline_Flights_Source" />
+    <NavigationProperty Name="Departures" Relationship="Self.Flight_Departures" FromRole="Flight_Departures_Source" ToRole="Flight_Departures_Target" />
+    <NavigationProperty Name="DestinationAirport" Relationship="Self.Flight_DestinationAirport" FromRole="Flight_DestinationAirport_Source" ToRole="Flight_DestinationAirport_Target" />
+    <NavigationProperty Name="SourceAirport" Relationship="Self.Flight_SourceAirport" FromRole="Flight_SourceAirport_Source" ToRole="Flight_SourceAirport_Target" />
+  </EntityType>
+  <EntityType Name="Airline" customannotation:ClrType="Airport_IS.Models.Entities.Airline, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirlineName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Flights" Relationship="Self.Airline_Flights" FromRole="Airline_Flights_Source" ToRole="Airline_Flights_Target" />
+  </EntityType>
+  <EntityType Name="Airport" customannotation:ClrType="Airport_IS.Models.Entities.Airport, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AirportName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.City_Airports" FromRole="City_Airports_Target" ToRole="City_Airports_Source" />
+  </EntityType>
+  <EntityType Name="City" customannotation:ClrType="Airport_IS.Models.Entities.City, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Airports" Relationship="Self.City_Airports" FromRole="City_Airports_Source" ToRole="City_Airports_Target" />
+    <NavigationProperty Name="Country" Relationship="Self.Country_Cities" FromRole="Country_Cities_Target" ToRole="Country_Cities_Source" />
+  </EntityType>
+  <EntityType Name="Country" customannotation:ClrType="Airport_IS.Models.Entities.Country, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.Country_Cities" FromRole="Country_Cities_Source" ToRole="Country_Cities_Target" />
+  </EntityType>
+  <EntityType Name="Rate" customannotation:ClrType="Airport_IS.Models.Entities.Rate, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RateName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="amountOfMoney" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departures" Relationship="Self.Rate_Departures" FromRole="Rate_Departures_Source" ToRole="Rate_Departures_Target" />
+  </EntityType>
+  <EntityType Name="TicketSale" customannotation:ClrType="Airport_IS.Models.Entities.TicketSale, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartureId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PassportSeries" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PassportNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PlaceNumber" Type="Int32" />
+    <Property Name="TicketPrice" Type="Double" Nullable="false" />
+    <Property Name="Class" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Registered" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Baggages" Relationship="Self.Baggage_TicketSale" FromRole="Baggage_TicketSale_Target" ToRole="Baggage_TicketSale_Source" />
+    <NavigationProperty Name="Departure" Relationship="Self.TicketSale_Departure" FromRole="TicketSale_Departure_Source" ToRole="TicketSale_Departure_Target" />
+  </EntityType>
+  <EntityType Name="Baggage" customannotation:ClrType="Airport_IS.Models.Entities.Baggage, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketSaleId" Type="Int32" Nullable="false" />
+    <Property Name="Weight" Type="Double" Nullable="false" />
+    <NavigationProperty Name="TicketSale" Relationship="Self.Baggage_TicketSale" FromRole="Baggage_TicketSale_Source" ToRole="Baggage_TicketSale_Target" />
+  </EntityType>
+  <Association Name="Departure_Aircraft">
+    <End Role="Departure_Aircraft_Source" Type="Self.Departure" Multiplicity="*" />
+    <End Role="Departure_Aircraft_Target" Type="Self.Aircraft" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Departure_Aircraft_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Departure_Aircraft_Source">
+        <PropertyRef Name="AircraftId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AirportTax_Departures">
+    <End Role="AirportTax_Departures_Source" Type="Self.AirportTax" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AirportTax_Departures_Target" Type="Self.Departure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AirportTax_Departures_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AirportTax_Departures_Target">
+        <PropertyRef Name="AirportTaxId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Crew_Departures">
+    <End Role="Crew_Departures_Source" Type="Self.Crew" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Crew_Departures_Target" Type="Self.Departure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Crew_Departures_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Crew_Departures_Target">
+        <PropertyRef Name="CrewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Pilot_Crew">
+    <End Role="Pilot_Crew_Source" Type="Self.Pilot" Multiplicity="*" />
+    <End Role="Pilot_Crew_Target" Type="Self.Crew" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Pilot_Crew_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pilot_Crew_Source">
+        <PropertyRef Name="CrewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Position_Pilots">
+    <End Role="Position_Pilots_Source" Type="Self.Position" Multiplicity="0..1" />
+    <End Role="Position_Pilots_Target" Type="Self.Pilot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position_Pilots_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Position_Pilots_Target">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Airline_Flights">
+    <End Role="Airline_Flights_Source" Type="Self.Airline" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Airline_Flights_Target" Type="Self.Flight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Airline_Flights_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Airline_Flights_Target">
+        <PropertyRef Name="AirlineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Flight_Departures">
+    <End Role="Flight_Departures_Source" Type="Self.Flight" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Flight_Departures_Target" Type="Self.Departure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight_Departures_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Flight_Departures_Target">
+        <PropertyRef Name="FlightId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="City_Airports">
+    <End Role="City_Airports_Source" Type="Self.City" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="City_Airports_Target" Type="Self.Airport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City_Airports_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Airports_Target">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Country_Cities">
+    <End Role="Country_Cities_Source" Type="Self.Country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Country_Cities_Target" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_Cities_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Country_Cities_Target">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Flight_DestinationAirport">
+    <End Role="Flight_DestinationAirport_Source" Type="Self.Flight" Multiplicity="*" />
+    <End Role="Flight_DestinationAirport_Target" Type="Self.Airport" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Flight_DestinationAirport_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Flight_DestinationAirport_Source">
+        <PropertyRef Name="DestinationAirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Flight_SourceAirport">
+    <End Role="Flight_SourceAirport_Source" Type="Self.Flight" Multiplicity="*" />
+    <End Role="Flight_SourceAirport_Target" Type="Self.Airport" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Flight_SourceAirport_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Flight_SourceAirport_Source">
+        <PropertyRef Name="SourceAirportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Rate_Departures">
+    <End Role="Rate_Departures_Source" Type="Self.Rate" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Rate_Departures_Target" Type="Self.Departure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rate_Departures_Source">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rate_Departures_Target">
+        <PropertyRef Name="RateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Baggage_TicketSale">
+    <End Role="Baggage_TicketSale_Source" Type="Self.Baggage" Multiplicity="*" />
+    <End Role="Baggage_TicketSale_Target" Type="Self.TicketSale" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="Baggage_TicketSale_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Baggage_TicketSale_Source">
+        <PropertyRef Name="TicketSaleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TicketSale_Departure">
+    <End Role="TicketSale_Departure_Source" Type="Self.TicketSale" Multiplicity="*" />
+    <End Role="TicketSale_Departure_Target" Type="Self.Departure" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <ReferentialConstraint>
+      <Principal Role="TicketSale_Departure_Target">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketSale_Departure_Source">
+        <PropertyRef Name="DepartureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AirportContext" customannotation:UseClrTypes="true">
+    <EntitySet Name="Aircrafts" EntityType="Self.Aircraft" />
+    <EntitySet Name="Departures" EntityType="Self.Departure" />
+    <EntitySet Name="AirportTaxes" EntityType="Self.AirportTax" />
+    <EntitySet Name="Crews" EntityType="Self.Crew" />
+    <EntitySet Name="Pilots" EntityType="Self.Pilot" />
+    <EntitySet Name="Positions" EntityType="Self.Position" />
+    <EntitySet Name="Flights" EntityType="Self.Flight" />
+    <EntitySet Name="Airlines" EntityType="Self.Airline" />
+    <EntitySet Name="Airports" EntityType="Self.Airport" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Rates" EntityType="Self.Rate" />
+    <EntitySet Name="TicketSales" EntityType="Self.TicketSale" />
+    <EntitySet Name="Baggages" EntityType="Self.Baggage" />
+    <AssociationSet Name="Departure_Aircraft" Association="Self.Departure_Aircraft">
+      <End Role="Departure_Aircraft_Source" EntitySet="Departures" />
+      <End Role="Departure_Aircraft_Target" EntitySet="Aircrafts" />
+    </AssociationSet>
+    <AssociationSet Name="AirportTax_Departures" Association="Self.AirportTax_Departures">
+      <End Role="AirportTax_Departures_Source" EntitySet="AirportTaxes" />
+      <End Role="AirportTax_Departures_Target" EntitySet="Departures" />
+    </AssociationSet>
+    <AssociationSet Name="Crew_Departures" Association="Self.Crew_Departures">
+      <End Role="Crew_Departures_Source" EntitySet="Crews" />
+      <End Role="Crew_Departures_Target" EntitySet="Departures" />
+    </AssociationSet>
+    <AssociationSet Name="Pilot_Crew" Association="Self.Pilot_Crew">
+      <End Role="Pilot_Crew_Source" EntitySet="Pilots" />
+      <End Role="Pilot_Crew_Target" EntitySet="Crews" />
+    </AssociationSet>
+    <AssociationSet Name="Position_Pilots" Association="Self.Position_Pilots">
+      <End Role="Position_Pilots_Source" EntitySet="Positions" />
+      <End Role="Position_Pilots_Target" EntitySet="Pilots" />
+    </AssociationSet>
+    <AssociationSet Name="Airline_Flights" Association="Self.Airline_Flights">
+      <End Role="Airline_Flights_Source" EntitySet="Airlines" />
+      <End Role="Airline_Flights_Target" EntitySet="Flights" />
+    </AssociationSet>
+    <AssociationSet Name="Flight_Departures" Association="Self.Flight_Departures">
+      <End Role="Flight_Departures_Source" EntitySet="Flights" />
+      <End Role="Flight_Departures_Target" EntitySet="Departures" />
+    </AssociationSet>
+    <AssociationSet Name="City_Airports" Association="Self.City_Airports">
+      <End Role="City_Airports_Source" EntitySet="Cities" />
+      <End Role="City_Airports_Target" EntitySet="Airports" />
+    </AssociationSet>
+    <AssociationSet Name="Country_Cities" Association="Self.Country_Cities">
+      <End Role="Country_Cities_Source" EntitySet="Countries" />
+      <End Role="Country_Cities_Target" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="Flight_DestinationAirport" Association="Self.Flight_DestinationAirport">
+      <End Role="Flight_DestinationAirport_Source" EntitySet="Flights" />
+      <End Role="Flight_DestinationAirport_Target" EntitySet="Airports" />
+    </AssociationSet>
+    <AssociationSet Name="Flight_SourceAirport" Association="Self.Flight_SourceAirport">
+      <End Role="Flight_SourceAirport_Source" EntitySet="Flights" />
+      <End Role="Flight_SourceAirport_Target" EntitySet="Airports" />
+    </AssociationSet>
+    <AssociationSet Name="Rate_Departures" Association="Self.Rate_Departures">
+      <End Role="Rate_Departures_Source" EntitySet="Rates" />
+      <End Role="Rate_Departures_Target" EntitySet="Departures" />
+    </AssociationSet>
+    <AssociationSet Name="Baggage_TicketSale" Association="Self.Baggage_TicketSale">
+      <End Role="Baggage_TicketSale_Source" EntitySet="Baggages" />
+      <End Role="Baggage_TicketSale_Target" EntitySet="TicketSales" />
+    </AssociationSet>
+    <AssociationSet Name="TicketSale_Departure" Association="Self.TicketSale_Departure">
+      <End Role="TicketSale_Departure_Source" EntitySet="TicketSales" />
+      <End Role="TicketSale_Departure_Target" EntitySet="Departures" />
+    </AssociationSet>
+    <EntitySet Name="Roles" EntityType="Airport_IS.Models.IdentityRole" />
+    <EntitySet Name="IdentityUserRoles" EntityType="Airport_IS.Models.IdentityUserRole" />
+    <EntitySet Name="Users" EntityType="Airport_IS.Models.ApplicationUser" />
+    <AssociationSet Name="IdentityRole_Users" Association="Airport_IS.Models.IdentityRole_Users">
+      <End Role="IdentityRole" EntitySet="Roles" />
+      <End Role="IdentityUserRole" EntitySet="IdentityUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="ApplicationUser_Roles" Association="Airport_IS.Models.ApplicationUser_Roles">
+      <End Role="ApplicationUser" EntitySet="Users" />
+      <End Role="IdentityUserRole" EntitySet="IdentityUserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="IdentityRole" customannotation:ClrType="Microsoft.AspNet.Identity.EntityFramework.IdentityRole, Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Airport_IS.Models.IdentityRole_Users" FromRole="IdentityRole" ToRole="IdentityUserRole" />
+  </EntityType>
+  <EntityType Name="IdentityUserRole" customannotation:ClrType="Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole, Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IdentityRole" Relationship="Airport_IS.Models.IdentityRole_Users" FromRole="IdentityUserRole" ToRole="IdentityRole" />
+    <NavigationProperty Name="ApplicationUser" Relationship="Airport_IS.Models.ApplicationUser_Roles" FromRole="IdentityUserRole" ToRole="ApplicationUser" />
+  </EntityType>
+  <EntityType Name="ApplicationUser" customannotation:ClrType="Airport_IS.Models.ApplicationUser, Airport_IS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
+    <NavigationProperty Name="Roles" Relationship="Airport_IS.Models.ApplicationUser_Roles" FromRole="ApplicationUser" ToRole="IdentityUserRole" />
+  </EntityType>
+  <Association Name="IdentityRole_Users">
+    <End Type="Airport_IS.Models.IdentityRole" Role="IdentityRole" Multiplicity="1" />
+    <End Type="Airport_IS.Models.IdentityUserRole" Role="IdentityUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IdentityRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IdentityUserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ApplicationUser_Roles">
+    <End Type="Airport_IS.Models.ApplicationUser" Role="ApplicationUser" Multiplicity="1" />
+    <End Type="Airport_IS.Models.IdentityUserRole" Role="IdentityUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="IdentityUserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
